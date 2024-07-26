@@ -67,12 +67,54 @@ this is where you'll be mostly working from.
       // ...
   )}
 
-# Pages and Routes
+# Font optimization
+ > the next/font file downloads the font at build time and hosts them with other static assets, meaning when the user visits the websites no additional request are made.
 
-| File based routing : next.js uses files to create routes for the web
-application.
+ - adding a font.
+ > create a file named fonts.ts in /app/ui
+ import { Inter } from 'next/font/google';
+ export const inter = Inter({ subsets: ['latin'] });
 
+ > add font in the body :
+ <body className={`${inter.className} antialiased`}>{children}</body>
+
+ # image optimization
+ image optimization in next.js prevents up from manually : 
+ > making images responsivs.
+ > specifying different sizes in different devices.
+ > lazy loading out of vp images etc
+ | we can use the /next/image component to automatically optimise images.
+
+ The <Image> Component is an extension of the HTML <img> tag, and comes with automatic image optimization, such as:
+
+ Preventing layout shift automatically when images are loading.
+ Resizing images to avoid shipping large images to devices with a smaller viewport.
+ Lazy loading images by default (images load as they enter the viewport).
+ Serving images in modern formats, like WebP and AVIF, when the browser supports it.
+
+
+ # Creating layouts and pages
+ - Nested Routing
+ > next.js uses file-system routing, folders are used to create nested routes.
+ > Each folder represent a route segment that maps to a URL
+
+`page.tsx` is a special Next.js file that exports a React component, and it's required for the route to be accessible
 > To create a route you have to create a directory, the directory name becomes
 > the route name in the browser. Once the directory is created, the nested file
 > must be page.[tsx,jsx,js,ts], this allows next.js to recognise the file as the
 > root file for that
+> Note: only the page.tsx is accessable as a route when nested, all other files will not be considered as routes.
+
+> when nesting routes, created nested folder, in that folder create page.jsx and that will become a route.
+
+# Creating the dashboard layout
+- the layout.tsx is used to create shared UI between mutliple pages.
+> layouts are a blueprint guide of how a page is structured.
+> components added on the layout.tsx file will be persistent in all the peer pages, for example :
+"if you add a footer in the layout.tsx file, all routes in that page will contain footer"
+`Think of layout.tsx as a container that wraps your pages, providing a consistent structure and design. Any components you add to layout.tsx will be displayed on all pages that use this layout.`
+> Benefit : once a layout is rendered, it is preserved then only the page.tsx files will re-render, this is refered to as partial re-rendering (Partial rendering means only the route segments that change on navigation re-render on the client, and any shared segments are preserved.)
+
+- Root layout
+> any ui added in the root layout will be shared across all pages of the application.
+> it can be used to modify the html,body tages and the meta data of the application.
