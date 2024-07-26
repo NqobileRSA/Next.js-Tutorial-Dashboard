@@ -45,6 +45,28 @@ this is where you'll be mostly working from.
 > dependecies. | `lib` : third party libraries || custom libraries. | `utils` :
 > helper functions || utility functions
 
+# Styling 
+  > styles can be added in the global.css file.
+  > recommended practice is to add the styles on the global root file "layout.tsx"
+  CSS Modules : allow you to scope CSS to a component by automatically creating unique class names, so you don't have to worry about style collisions as well.
+  > when styling using css modules instead of tailwind, you can create the stylesheet in the app/ui/stylesheet.module.css and declare the styles, then you can target the element with (styles.className)
+  - the clsx library can be used to toggle classnames dynamically ; 
+  import clsx from 'clsx';
+  
+  export default function InvoiceStatus({ status }: { status: string }) {
+    return (
+      <span
+        className={clsx(
+          'inline-flex items-center rounded-full px-2 py-1 text-sm',
+          {
+            'bg-gray-100 text-gray-500': status === 'pending',
+            'bg-green-500 text-white': status === 'paid',
+          },
+        )}
+      >
+      // ...
+  )}
+
 # Pages and Routes
 
 | File based routing : next.js uses files to create routes for the web
