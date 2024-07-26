@@ -29,6 +29,7 @@
 
 > Install node v10.01 + Open terminal on vscode. Run : `npx create-next-app`
 > accept all the prompts.
+> but for this project run: npx create-next-app@latest nextjs-dashboard --example "https://github.com/vercel/next-learn/tree/main/dashboard/starter-example" --use-pnpm
 
 # Folder structure
 
